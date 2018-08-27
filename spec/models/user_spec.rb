@@ -40,28 +40,23 @@ RSpec.describe User, type: :model do
   end
   # 重複したメールアドレスなら無効な状態であること
   it "is invalid with a duplicate email address" do
-    User.create(
-      first_name: "Ken",
-      last_name:  "Tester",
-      email:      "tester@example.com",
-      password:   "dottle-nouveau-pavilion",
-    )
-    user = User.new(
-      first_name: "Ken",
-      last_name:  "Tester",
-      email:      "tester@example.com",
-      password:   "dottle-nouveau-pavilion",
-    )
+    FactoryBot.create(:user, email: "aaron@example.com")
+    user = FactoryBot.build(:user, email: "aaron@example.com")
     user.valid?
     expect(user.errors[:email]).to include("has already been taken")
   end
   # フルネームが出力メソッドのテスト
   it "returns a user's full name as a string" do
-    user = User.new(
-      first_name: "Ken",
-      last_name:  "Tester",
-      email:      "tester@example.com", 
-    )
+    user = FactoryBot.build(:user, first_name: "Ken", last_name: "Tester")
     expect(user.name).to eq "Ken Tester"
   end
+
+  # エラーになる（明示的に異なる値を設定しない限り、ファクト リが常にユーザーのメールアドレスを tester@example.com に設定する）
+  # 複数のユーザーで何かする
+  it "does something with multiple users" do
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    expect(true).to be_truthy
+  end
+  # シーケンスを使ってユニークバリデーションを持つフィールドを扱う
 end
