@@ -1,0 +1,8 @@
+linter:
+rubocop:
+  root_dir: 'everyday-rspec-study'
+
+phpmd:
+  root_dir: 'everyday-rspec-study'
+  options:
+    rule: 'phpmd.xml'
