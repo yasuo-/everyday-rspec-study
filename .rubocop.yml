@@ -1,0 +1,31 @@
+inherit_from:
+  - .rubocop_airbnb.yml
+  - .rubocop_todo.yml
+
+
+
+
+Rails:
+  Enabled: true
+AllCops:
+  TargetRubyVersion: 2.4.1
+  DisplayStyleGuide: true
+  Exclude: 
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'vendor/**/*'
+    - 'lib/tasks/_force_reload.rake'
+
+# ブロック内の行数
+Metrics/BlockLength:
+  Exclude: 
+    - 'spec/**/*'
+# Airbnb / ModuleMethodInWrongFileの設定解除
+ModuleMethodInWrongFile:
+  Enabled: false
+# メソッド名のprefixに「set_」「get_」を許可しない
+AccessorMethodName:
+  Enabled: true
